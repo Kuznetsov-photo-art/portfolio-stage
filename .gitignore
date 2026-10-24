@@ -1,0 +1,6 @@
+src/cases/obzhora/obzhora-case.html
+src/cases/obzhora/src/
+.DS_Store
+.claude/
+node_modules/
+*.blend1
