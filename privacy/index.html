@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A">
+<title>Конфиденциальность • Andrew Kuznetsov</title>
+<meta name="description" content="Как сайт andrewkuznetsov.com обращается с данными посетителей и правами на материалы портфолио">
+<link rel="canonical" href="https://stage.andrewkuznetsov.com/privacy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Andrew Kuznetsov">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="TEST · Конфиденциальность">
+<meta property="og:description" content="Как сайт andrewkuznetsov.com обращается с данными посетителей и правами на материалы портфолио">
+<meta property="og:url" content="https://stage.andrewkuznetsov.com/privacy/">
+<meta property="og:image" content="https://stage.andrewkuznetsov.com/assets/og/og-stage.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://stage.andrewkuznetsov.com/assets/og/og-stage.jpg?v=2">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<script>/* theme and language, set before paint so there is no flash; language: the saved choice, else Russian only for a Russian browser/system */
+try{ const t=localStorage.getItem('theme'); if(t) document.documentElement.setAttribute('data-theme',t); }catch(e){}
+document.documentElement.lang=(function(){try{var s=localStorage.getItem('lang');if(s==='ru'||s==='en')return s;}catch(e){}return /^ru(-|$)/i.test(navigator.language||'')?'ru':'en';})();</script>
+<style>
+:root{
+  --bg:#0A0A0A; --ink:#F2F2F2; --ink-2:#A3A3A3; --ink-3:#6B6B6B;
+  --line:rgba(242,242,242,.10); --line-2:rgba(242,242,242,.22);
+  --display:'Unbounded',system-ui,sans-serif;
+  --body:'Golos Text',system-ui,-apple-system,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+  --gutter:clamp(16px,4vw,56px);
+  color-scheme:dark;
+}
+:root[data-theme="light"]{
+  --bg:#FFFFFF; --ink:#0A0A0A; --ink-2:#4A4A4A; --ink-3:#8A8A8A;
+  --line:rgba(10,10,10,.10); --line-2:rgba(10,10,10,.22);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--ink);color:var(--bg)}
+:focus-visible{outline:1px solid var(--ink);outline-offset:3px}
+.mono{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+html[lang="ru"] [lang="en"], html[lang="en"] [lang="ru"]{display:none!important}
+
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;height:62px;padding-inline:var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:16px;mix-blend-mode:difference;color:#fff} /* same header as the home page: difference blend over a progressive blur + fade */
+.navfx{position:fixed;z-index:49;inset:0 0 auto 0;height:calc(108px + env(safe-area-inset-top,0px));pointer-events:none} /* in-app browsers (Telegram) overlay their own bar and report it as a top inset: the blur/fade must cover it too */
+.navfx i,.navfx::after{position:absolute;inset:0}
+.navfx i:nth-child(1){-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask-image:linear-gradient(#000 55%,transparent);mask-image:linear-gradient(#000 55%,transparent)}
+.navfx i:nth-child(2){-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);-webkit-mask-image:linear-gradient(#000 30%,transparent 70%);mask-image:linear-gradient(#000 30%,transparent 70%)}
+.navfx i:nth-child(3){-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);-webkit-mask-image:linear-gradient(#000 10%,transparent 45%);mask-image:linear-gradient(#000 10%,transparent 45%)}
+.navfx::after{content:'';background:linear-gradient(var(--bg),color-mix(in srgb,var(--bg) 75%,transparent) 30%,color-mix(in srgb,var(--bg) 25%,transparent) 65%,transparent)}
+.navfx::before{content:'';position:absolute;left:0;right:0;bottom:100%;height:240px;background:var(--bg)}
+@media(max-width:760px){.navfx{height:calc(84px + env(safe-area-inset-top,0px))}}
+.nav a{text-decoration:none}
+.nav .r{display:flex;align-items:center;gap:20px}
+.nav .back{display:flex;gap:10px;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.nav .lang{color:rgba(255,255,255,.55)}.nav .lang b{color:#fff}
+.nav .back .ar{font-family:var(--body);font-weight:300;font-size:20px;line-height:0;letter-spacing:0;transform:translateY(-1px)} /* same back link as in the case header */
+.lang{font-family:var(--mono);font-size:11px;letter-spacing:.1em;background:none;border:0;padding:0;color:var(--ink-3);cursor:pointer}
+/* theme switch — same as on the home page */
+.sw{position:relative;flex:none;width:48px;height:26px;border-radius:99px;border:1px solid currentColor;background:none;padding:0;color:inherit;cursor:pointer}
+.sw .k{position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:currentColor;display:grid;place-items:center;transition:transform .4s cubic-bezier(.2,.8,.2,1)}
+.sw svg{grid-area:1/1;width:14px;height:14px;fill:none;stroke:#000;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:opacity .3s,transform .4s cubic-bezier(.2,.8,.2,1)}
+.sw .sun{opacity:0;transform:rotate(-90deg) scale(.6)}
+.sw .moon path,.sw .sun circle{fill:#000}
+:root[data-theme="light"] .sw .k{transform:translateX(22px)}
+:root[data-theme="light"] .sw .moon{opacity:0;transform:rotate(90deg) scale(.6)}
+:root[data-theme="light"] .sw .sun{opacity:1;transform:none}
+.lang b{font-weight:400;color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+
+main{max-width:880px;padding:clamp(56px,9vw,128px) var(--gutter) clamp(72px,10vw,140px)}
+@media(min-width:1000px){main{margin-left:max(var(--gutter),calc((100vw - 1560px)/2 + var(--gutter)));padding-left:0}}
+h1{font-family:var(--display);font-weight:300;font-size:clamp(21px,6.8vw,96px);letter-spacing:-.05em;line-height:.95;margin:16px 0 0}
+.upd{margin-top:28px}
+.lead{font-size:clamp(19px,1.8vw,22px);color:var(--ink);margin:40px 0 0;max-width:40em}
+section{border-top:1px solid var(--line);margin-top:56px;padding-top:28px;display:grid;grid-template-columns:56px 1fr;gap:0 24px}
+section .n{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--ink-3);padding-top:6px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(20px,2vw,26px);letter-spacing:-.03em;line-height:1.2;margin:0 0 14px}
+section p,section li{color:var(--ink-2);margin:0 0 12px}
+section ul{margin:0;padding-left:18px}
+section strong{color:var(--ink);font-weight:500}
+section a{text-underline-offset:3px;text-decoration-color:var(--line-2)}
+section a:hover{text-decoration-color:var(--ink)}
+@media(max-width:600px){section{grid-template-columns:1fr}section .n{padding:0 0 8px}}
+
+footer{padding:28px var(--gutter) 40px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+footer .cp{font-family:var(--body);font-size:1.5em;line-height:0;letter-spacing:0;vertical-align:-.1em} /* © in the mono font is tiny — draw it with the body font at cap height */
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink)}
+
+.totop{position:fixed;right:var(--gutter);bottom:calc(var(--gutter) + env(safe-area-inset-bottom,0px));z-index:60;width:48px;height:48px;border-radius:50%;border:1px solid var(--line-2);background:color-mix(in srgb,var(--bg) 60%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0;opacity:0;transform:translateY(12px) scale(.9);pointer-events:none;transition:opacity .35s,transform .45s cubic-bezier(.2,.8,.2,1),background .3s,color .3s,border-color .3s}
+.totop.on{opacity:1;transform:none;pointer-events:auto}
+.totop svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s}
+@media(hover:hover){.totop:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}.totop:hover svg{transform:translateY(-2px)}}
+@media(max-width:760px){.totop{width:44px;height:44px}}
+/* viewport-fit=cover: in-app browsers (Telegram) let the page draw under their top bar and report it as a safe-area inset — the header fade then covers it. Keep content out of the side notch in landscape */
+html{background:var(--bg)}
+body{padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+.nav{padding-left:calc(var(--gutter) + env(safe-area-inset-left,0px));padding-right:calc(var(--gutter) + env(safe-area-inset-right,0px))}
+::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition-new(root){z-index:2}
+/* language glitch */
+html.glitch main,html.glitch footer{animation:glx .28s steps(1,end) 1}
+html.glitch main :is(h1,h2,h3,p,a,b,span,li,em,strong,figcaption),html.glitch footer *,html.glitch .nav *{animation:gls .28s steps(1,end) 1}
+@keyframes glx{0%{transform:translateX(-4px)}18%{transform:translateX(5px) skewX(-2deg)}36%{transform:translateX(-2px)}54%{transform:translateX(3px)}72%{transform:translateX(-1px)}90%,100%{transform:none}}
+@keyframes gls{0%{text-shadow:3px 0 rgba(255,40,80,.85),-3px 0 rgba(0,220,255,.85)}30%{text-shadow:-4px 0 rgba(255,40,80,.8),4px 0 rgba(0,220,255,.8)}60%{text-shadow:2px 0 rgba(255,40,80,.6),-2px 0 rgba(0,220,255,.6)}85%,100%{text-shadow:none}}
+/* cursor dot — same as the home page: follows the mouse, grows to 24 px over links and buttons; mouse devices only */
+.cur{position:fixed;z-index:200;left:0;top:0;pointer-events:none;width:10px;height:10px;border-radius:50%;background:#fff;mix-blend-mode:difference;transform:translate(-50%,-50%);transition:width .25s,height .25s;display:none}
+@media(hover:hover) and (pointer:fine){.cur{display:block}}
+</style>
+</head>
+<body>
+<div class="navfx" aria-hidden="true"><i></i><i></i><i></i></div>
+<header class="nav">
+  <a class="back" href="/" data-back><b class="ar">←</b><span lang="ru">На главную</span><span lang="en">Home</span></a>
+  <div class="r">
+    <button class="lang" id="lang" type="button" aria-label="RU / EN"><span class="ru">RU</span> / <span class="en">EN</span></button>
+    <button class="sw" id="theme" type="button" aria-label="Toggle theme"><i class="k"><svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg></i></button>
+  </div>
+</header>
+
+<main>
+  <span class="mono" lang="ru">Документ</span><span class="mono" lang="en">Document</span>
+  <h1 lang="ru">Конфиденциальность</h1>
+  <h1 lang="en">Privacy</h1>
+  <div class="mono upd"><span lang="ru">Обновлено 13 октября 2026</span><span lang="en">Updated October 13, 2026</span></div>
+
+  <p class="lead" lang="ru">Это личное портфолио. Здесь нет форм, регистрации, рекламы и cookie, а посещения считает только анонимный счётчик — сайт не знает, кто вы</p>
+  <p class="lead" lang="en">This is a personal portfolio. There are no forms, sign-ups, ads or cookies, and visits are counted only by an anonymous counter — the site does not know who you are</p>
+
+  <section>
+    <span class="n">01</span>
+    <div lang="ru">
+      <h2>Что хранится в вашем браузере</h2>
+      <p>Только ваши настройки, чтобы сайт их помнил:</p>
+      <ul>
+        <li>язык RU или EN и светлая или тёмная тема — в localStorage</li>
+        <li>отметка, что заставка уже показана, и место, где вы остановились на главной, — в sessionStorage, до закрытия вкладки</li>
+      </ul>
+      <p>Эти данные не покидают ваше устройство, их можно удалить в настройках браузера</p>
+    </div>
+    <div lang="en">
+      <h2>What is stored in your browser</h2>
+      <p>Only your settings, so the site remembers them:</p>
+      <ul>
+        <li>RU or EN language and light or dark theme — in localStorage</li>
+        <li>a flag that the intro has been shown and your scroll position on the home page — in sessionStorage, until you close the tab</li>
+      </ul>
+      <p>This data never leaves your device, and you can clear it in your browser settings</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">02</span>
+    <div lang="ru">
+      <h2>Хостинг</h2>
+      <p>Сайт размещён на GitHub Pages. Как любой хостинг, GitHub может записывать технические данные запросов — IP-адрес, время, браузер — для безопасности и работы сервиса. Подробнее — в <a href="https://docs.github.com/ru/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Заявлении GitHub о конфиденциальности</a></p>
+      <p>Шрифты и все файлы, включая код счётчика, загружаются с этого же сайта. Наружу уходит только отметка о просмотре страницы — о ней ниже</p>
+    </div>
+    <div lang="en">
+      <h2>Hosting</h2>
+      <p>The site is hosted on GitHub Pages. Like any host, GitHub may log technical request data — IP address, time, browser — for security and to run the service. See the <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub General Privacy Statement</a></p>
+      <p>Fonts and all files, including the counter code, are served from this site. The only thing sent elsewhere is the page-view ping described below</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">03</span>
+    <div lang="ru">
+      <h2>Счётчик посещений</h2>
+      <p>Чтобы понимать, сколько людей заходит на сайт и откуда, я использую <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> — простой счётчик с открытым кодом. Он не ставит cookie, не следит за вами на других сайтах и не сохраняет IP-адрес</p>
+      <p>При просмотре страницы он отправляет только её адрес и заголовок, сайт, с которого вы пришли, и размер экрана. Браузер, систему и страну сервис определяет по самому запросу. Я вижу лишь общие цифры, без данных о конкретных людях</p>
+    </div>
+    <div lang="en">
+      <h2>Visit counter</h2>
+      <p>To see how many people visit the site and where they come from, I use <a href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a> — a simple open-source counter. It sets no cookies, does not follow you to other sites and does not store your IP address</p>
+      <p>For each page view it sends only the page address and title, the site you came from and your screen size. The service works out the browser, system and country from the request itself. I only see totals, never data about specific people</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">04</span>
+    <div lang="ru">
+      <h2>Если вы мне пишете</h2>
+      <p>В Telegram или на почту <a href="mailto:kuznetsov-photo.art@yandex.ru">kuznetsov-photo.art@yandex.ru</a> я получаю только то, что вы отправили сами: имя, контакт и текст. Использую это, чтобы ответить и обсудить задачу, и никому не передаю. Напишите — и я удалю переписку</p>
+      <p>Behance, LinkedIn, Habr Career и Telegram открываются на своих сайтах и работают по своим правилам</p>
+    </div>
+    <div lang="en">
+      <h2>If you write to me</h2>
+      <p>Via Telegram or email at <a href="mailto:kuznetsov-photo.art@yandex.ru">kuznetsov-photo.art@yandex.ru</a> I only get what you send yourself: your name, contact and message. I use it to reply and discuss your project, and I never share it. Ask and I will delete our correspondence</p>
+      <p>Behance, LinkedIn, Habr Career and Telegram open on their own sites and follow their own rules</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">05</span>
+    <div lang="ru">
+      <h2>Права на материалы</h2>
+      <p>Работы в портфолио показаны в ознакомительных целях. Права на проекты принадлежат их правообладателям — компаниям-заказчикам и автору. Копировать и использовать материалы сайта без письменного разрешения нельзя</p>
+      <p>Названия и логотипы компаний принадлежат их владельцам и упомянуты только как места работы и заказчики</p>
+    </div>
+    <div lang="en">
+      <h2>Rights to the materials</h2>
+      <p>The work in this portfolio is shown for reference only. Rights to the projects belong to their owners — the client companies and the author. Do not copy or reuse materials from this site without written permission</p>
+      <p>Company names and logos belong to their owners and are mentioned only as employers and clients</p>
+    </div>
+  </section>
+
+  <section>
+    <span class="n">06</span>
+    <div lang="ru">
+      <h2>Вопросы</h2>
+      <p>Всё, что касается этой страницы, — на <a href="mailto:kuznetsov-photo.art@yandex.ru">kuznetsov-photo.art@yandex.ru</a></p>
+    </div>
+    <div lang="en">
+      <h2>Questions</h2>
+      <p>Anything about this page — <a href="mailto:kuznetsov-photo.art@yandex.ru">kuznetsov-photo.art@yandex.ru</a></p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span><span class="cp">©</span> 2026 Andrew Kuznetsov · <span lang="ru">Все права защищены</span><span lang="en">All rights reserved</span></span>
+  <a href="/"><span lang="ru">На главную</span><span lang="en">Home</span></a>
+</footer>
+
+<div class="cur" id="cur" aria-hidden="true"></div>
+<button class="totop" id="totop" type="button" aria-label="Наверх"><svg viewBox="0 0 18 18" aria-hidden="true"><path d="M9 15V3M3.5 8.5L9 3l5.5 5.5"/></svg></button>
+
+<script>
+/* typography: glue 1–2 letter words to the next word and keep dashes off the line start (same rule as the home page) */
+const NB=s=>{ for(let k=0;k<3;k++) s=s.replace(/(^|[\s(«])([а-яёА-ЯЁ]{1,2}|[Aa]|I) /g,'$1$2 '); return s.replace(/ ([—–])/g,' $1'); };
+(function walk(n){ for(const c of n.childNodes){ if(c.nodeType===3) c.nodeValue=NB(c.nodeValue); else if(c.nodeType===1&&!/^(SCRIPT|STYLE)$/.test(c.tagName)) walk(c); } })(document.querySelector('main'));
+/* RU / EN */
+const root=document.documentElement, lb=document.getElementById('lang');
+const setLang=l=>{ root.lang=l; lb.innerHTML=l==='ru'?'<b>RU</b> / EN':'RU / <b>EN</b>'; document.title=l==='ru'?'Конфиденциальность • Andrew Kuznetsov':'Privacy • Andrew Kuznetsov'; document.getElementById('totop').setAttribute('aria-label',l==='ru'?'Наверх':'Back to top'); document.getElementById('theme').setAttribute('aria-label',l==='ru'?'Переключить тему':'Toggle theme'); };
+setLang(root.lang==='en'?'en':'ru');
+function glitch(){ /* language glitch: instant switch, then ~0.28 s RGB split + jitter (same as the home page) */
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return; const d=document.documentElement;
+  d.classList.remove('glitch'); void d.offsetWidth; d.classList.add('glitch'); clearTimeout(glitch.t); glitch.t=setTimeout(()=>d.classList.remove('glitch'),300); }
+lb.addEventListener('click',()=>{ const l=root.lang==='ru'?'en':'ru'; setLang(l); try{localStorage.setItem('lang',l)}catch(e){} glitch(); });
+/* theme: same storage as the home page ('' = dark, 'light') */
+/* theme switch: the new theme opens as a circle from the switch (View Transitions API), instant without it or with reduced motion */
+function circleTheme(btn,flip){ if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches||circleTheme.busy){ if(!circleTheme.busy) flip(); return; }
+  const r=btn.getBoundingClientRect(), x=r.left+r.width/2, y=r.top+r.height/2, R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
+  circleTheme.busy=true; const vt=document.startViewTransition(flip);
+  vt.ready.then(()=>document.documentElement.animate({clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${R}px at ${x}px ${y}px)`]},{duration:700,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'}));
+  vt.finished.finally(()=>{circleTheme.busy=false;}); }
+document.getElementById('theme').addEventListener('click',e=>circleTheme(e.currentTarget,()=>{
+  const light=root.getAttribute('data-theme')!=='light';
+  if(light) root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+  try{localStorage.setItem('theme',light?'light':'')}catch(e){}
+}));
+/* theme and language are site-wide: re-read them when the page is restored from the back/forward cache */
+addEventListener('pageshow',()=>{ try{ const t=localStorage.getItem('theme'); if(t==='light') root.setAttribute('data-theme','light'); else root.removeAttribute('data-theme');
+  const s=localStorage.getItem('lang'); const l=s==='ru'||s==='en'?s:root.lang; if(l!==root.lang) setLang(l); }catch(e){} });
+/* back to home: if we came from the home page, go back in history so it restores the scroll position */
+document.querySelectorAll('[data-back]').forEach(a=>a.addEventListener('click',e=>{
+  try{const r=new URL(document.referrer); if(r.origin===location.origin && r.pathname==='/' && history.length>1){e.preventDefault(); history.back()}}catch(_){}
+}));
+/* cursor */
+(()=>{ const cur=document.getElementById('cur'); if(!matchMedia('(hover:hover) and (pointer:fine)').matches){ cur.remove(); return; }
+  let cx=innerWidth/2, cy=innerHeight/2, tx=cx, ty=cy, curEl=null; addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;},{passive:true});
+  (function loop(){ cx+=(tx-cx)*.25; cy+=(ty-cy)*.25; cur.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
+  const setCur=t=>{ const hit=t&&t.closest&&t.closest('a,button,[role="button"],label,summary,.sw'); if(hit===curEl) return; curEl=hit; cur.style.width=cur.style.height=hit?'24px':''; };
+  document.addEventListener('pointerover',e=>setCur(e.target)); document.addEventListener('pointerout',e=>{ if(!e.relatedTarget) setCur(null); }); })();
+/* back to top */
+(()=>{const b=document.getElementById('totop');
+  /* at the page end the button parks with its centre on the footer's top line instead of covering the links */
+  const line=document.querySelector('footer'); let base=0; const measure=()=>{ b.style.bottom=''; base=parseFloat(getComputedStyle(b).bottom)||0; };
+  const upd=()=>{ b.classList.toggle('on',scrollY>innerHeight*.6);
+    if(line){ const lift=innerHeight-line.getBoundingClientRect().top-b.offsetHeight/2; b.style.bottom=Math.max(base,lift)+'px'; } };
+  measure(); addEventListener('scroll',upd,{passive:true}); addEventListener('resize',()=>{measure();upd();}); upd();
+  b.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));
+})();
+</script>
+<script>/* browser chrome colour follows the theme: Telegram's in-app browser paints its top bar with theme-color, otherwise the page shows through it without the header fade */
+(()=>{ const m=document.querySelector('meta[name="theme-color"]'); if(!m) return; const f=()=>{ m.content=(document.documentElement.getAttribute('data-theme')==='light')?'#FFFFFF':'#0A0A0A'; };
+  const o=new MutationObserver(f); o.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']}); o.observe(document.body,{attributes:true,attributeFilter:['class']}); f(); })();</script>
+<div aria-hidden="true" style="position:fixed;left:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));z-index:9999;font:600 10px/1 ui-monospace,Menlo,monospace;letter-spacing:.1em;background:#E5484D;color:#fff;padding:4px 6px;border-radius:4px;pointer-events:none">STAGE</div>
+</body>
+</html>
